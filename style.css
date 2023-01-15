@@ -1,0 +1,129 @@
+.starting-page {
+    display:block ;
+    border: 2px solid rgba(0, 0, 0, 0.361);
+    border-radius: 20px;
+    padding:30px;
+    text-align: center;
+   
+}
+
+
+
+
+.players {
+    display: flex;
+    justify-content: space-evenly;
+    cursor: pointer;
+}
+
+.players h2:first-of-type:hover {
+color: green;
+transform: scale(1.2);
+}
+
+.players h2:nth-child(2):hover {
+    color: green;
+    transform: scale(1.2);
+    }
+
+.start-btn {
+border: none;
+height: 30px;
+border-radius: 20px;
+font-weight: 700;
+}
+
+.start-btn:hover {
+    border: 1px solid;
+    height: 30px;
+    border-radius: 20px;
+    transform: scale(1.2);
+}
+.frame {
+    display: none;
+    
+}
+.container {
+    width: 500px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    border: none;
+    margin: 100px auto 0;
+}
+
+.container > div {
+    background-color: lightgrey;
+    height: 150px;
+    
+    text-align: center;
+    font-size: 100px;
+    border: 2px solid rgba(0, 0, 0, 0.361);
+}
+
+.container > div:nth-child(3n + 0) {
+    
+    border-right: none;
+}
+
+.container div:nth-child(1),
+div:nth-child(2),
+ div:nth-child(3) {
+
+border-top:none;
+
+}
+
+.container div:nth-child(1),
+div:nth-child(4),
+ div:nth-child(7) {
+
+border-left:none;
+
+}
+
+
+.container div:nth-child(7),
+div:nth-child(8),
+ div:nth-child(9) {
+
+border-bottom:none;
+
+}
+
+.container > div:hover {
+    background-color:darkgrey;
+   
+
+}
+
+.winning-page {
+    background-color:rgba(79, 79, 102, 0.4);
+    width: 100%;
+    height: 400px;
+    color: cornsilk;
+    display:none ;
+    align-items: center;
+    justify-content: center;
+    
+   
+}
+.winning-page div {
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+}
+
+.winning-page > h2 {
+   margin: 0 auto;
+   
+}
+
+.restart-btn {
+border: none;
+height: 20px;
+margin-right: 20px;
+}
+
+.restart-btn:hover {
+    background-color: chartreuse;
+    }
