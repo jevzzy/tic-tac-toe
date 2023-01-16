@@ -8,6 +8,7 @@ const playerTwo = playerFactory("2", "o")
 
 
 let currentplayer = playerOne.marker
+let waitingPlayer = playerTwo.marker
 
 const game = (function(){
 const start = document.querySelector(".start-btn")
@@ -54,12 +55,14 @@ restart.addEventListener("click", ()=>{
         board.textContent = currentplayer
         if(currentplayer == playerOne.marker ){
          currentplayer = playerTwo.marker
+         waitingPlayer = playerOne.marker
        
  
         
         }
         else if(currentplayer == playerTwo.marker){
          currentplayer = playerOne.marker
+         waitingPlayer = playerTwo.marker
          
         }
       }
@@ -91,6 +94,8 @@ restart.addEventListener("click", ()=>{
   function clear() {
      for(i=0;i<boards.length; i++) {
       boards[i].textContent = ""
+      boards[i].style.backgroundColor = "lightgrey"
+      currentplayer = playerOne.marker
      }
   }
   
@@ -99,36 +104,43 @@ restart.addEventListener("click", ()=>{
   function checkWinner() {
     for(w=0; w< emptyboard.length; w++) {
       emptyboard[w] = boards[w].textContent
+      
     }
-    
+      
     console.log(emptyboard)
     for (let i = 0; i < winningArr.length; i++) {
       let winComboArray = winningArr[i];
-      let isAWin = true; // **ASSUME it's a win
+      // when we start checking each combo, we start by assuming it is a win
+      let isAWin = true;
       for (let j = 0; j<winComboArray.length; j++){
         let cellIndex = winComboArray[j];
-        if(boards[ cellIndex ] == currentplayer){
-          isAWin = true
-          console.log(isAWin)
-          
-          // they didn't win in this combo.
-          // let's tell isAWin that it ain't true no more.
-        }
-        else if(boards[cellIndex] !== currentplayer) {
+        if(emptyboard[ cellIndex ]  !== waitingPlayer) {
+          // the ONLY way it is not a win is if any cell
+          //  doesn't contain the current player's marker
           isAWin = false
           console.log(isAWin)
         }
       }
       // at this point, did this combination represent a win?
       //  isAWin will tell us! If it is a win, return a WIN!
-      // if not, sad face, keep looping.
-    }
+      if(isAWin) {
 
-      }
+        winningPage.style.display = "flex"
+        winningText.textContent = `${waitingPlayer} won`
+        boards[winComboArray[0]].style.backgroundColor = "red"
+        boards[winComboArray[1]].style.backgroundColor = "orange"
+        boards[winComboArray[2]].style.backgroundColor = "yellow"
+        return winComboArray; } // this way, we get back the indexes of a win
+      // if not, sad face, keep looping.
  
+    }
+    
+    
+    // if we get to here, there was no win. We checked all the combos, and not
+    // one was a winner. return false, to tell whoever called us "nope!"
+  }
   
-  
-  
+  //.style.backgroundColor = "green"
   
    
 }())
