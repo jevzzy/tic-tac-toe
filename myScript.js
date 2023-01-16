@@ -50,25 +50,41 @@ restart.addEventListener("click", ()=>{
   
   boards.forEach((board)=>{
     board.addEventListener("click",(e)=>{
-       board.textContent = currentplayer
-       if(currentplayer == playerOne.marker ){
-        currentplayer = playerTwo.marker
-      
-
+      if(board.textContent == "") {
+        board.textContent = currentplayer
+        if(currentplayer == playerOne.marker ){
+         currentplayer = playerTwo.marker
        
-       }
-       else if(currentplayer == playerTwo.marker){
-        currentplayer = playerOne.marker
+ 
         
-       }
+        }
+        else if(currentplayer == playerTwo.marker){
+         currentplayer = playerOne.marker
+         
+        }
+      }
+      else if(board.textContent !== "") {
+        board.style.cursor = "not-allowed"
+       preventDefault()
+      }
+       
+      
+    
+        
+      
+      
+      
        console.log(checkWinner())
       
        
        
-    }, {once:true})
+    })
   
     
   })
+
+
+ 
   //=======================================================
   
 
@@ -79,36 +95,38 @@ restart.addEventListener("click", ()=>{
   }
   
   
-  function checkWinner() {
-    for(i=0;i<boards.length; i++) {
-      emptyboard[i] = boards[i].textContent
-    
-    }
-    for(i=0;i<winningArr.length;i++){
-      const condition = winningArr[i]
-      const cellA = emptyboard[condition[0]]  
-      const cellB = emptyboard[condition[1]]
-      const cellC = emptyboard[condition[2]]  
-     if (cellA == "" || cellB == "" || cellC == "") {
-      continue
-     }
-
-      if(cellA == cellB && cellB == cellC) {
-        gamePage.style.display = "none"
-        winningPage.style.display = "flex"
-        winningText.textContent = `${cellA} wins`
-         
-        
-          
-        break
   
-      }
- if(cellA !== cellB && cellB !== cellC) {
-  winningText.textContent = ` draw`
- }
+  function checkWinner() {
+    for(w=0; w< emptyboard.length; w++) {
+      emptyboard[w] = boards[w].textContent
     }
+    
     console.log(emptyboard)
-  }
+    for (let i = 0; i < winningArr.length; i++) {
+      let winComboArray = winningArr[i];
+      let isAWin = true; // **ASSUME it's a win
+      for (let j = 0; j<winComboArray.length; j++){
+        let cellIndex = winComboArray[j];
+        if(boards[ cellIndex ] == currentplayer){
+          isAWin = true
+          console.log(isAWin)
+          
+          // they didn't win in this combo.
+          // let's tell isAWin that it ain't true no more.
+        }
+        else if(boards[cellIndex] !== currentplayer) {
+          isAWin = false
+          console.log(isAWin)
+        }
+      }
+      // at this point, did this combination represent a win?
+      //  isAWin will tell us! If it is a win, return a WIN!
+      // if not, sad face, keep looping.
+    }
+
+      }
+ 
+  
   
   
   
