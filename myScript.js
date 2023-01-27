@@ -79,7 +79,9 @@ restart.addEventListener("click", ()=>{
       
        console.log(checkWinner())
       
-       
+     
+  
+   
        
     })
   
@@ -104,6 +106,7 @@ restart.addEventListener("click", ()=>{
   function checkWinner() {
     for(w=0; w< emptyboard.length; w++) {
       emptyboard[w] = boards[w].textContent
+     
       
     }
       
@@ -130,19 +133,18 @@ restart.addEventListener("click", ()=>{
         boards[winComboArray[0]].style.backgroundColor = "red"
         boards[winComboArray[1]].style.backgroundColor = "orange"
         boards[winComboArray[2]].style.backgroundColor = "yellow"
-        return winComboArray; } // this way, we get back the indexes of a win
+        return winComboArray; 
+      } // this way, we get back the indexes of a win
       // if not, sad face, keep looping.
+     
  
     }
-    
     
     // if we get to here, there was no win. We checked all the combos, and not
     // one was a winner. return false, to tell whoever called us "nope!"
   }
   
-  //.style.backgroundColor = "green"
   
-   
 }())
 
 
