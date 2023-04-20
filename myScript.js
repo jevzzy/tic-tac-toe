@@ -10,7 +10,7 @@ const playerTwo = playerFactory("2", "o")
 let currentplayer = playerOne.marker
 let waitingPlayer = playerTwo.marker
 
-const game = (function(){
+
 const start = document.querySelector(".start-btn")
 const restart = document.querySelector(".restart-btn")
 const start_page = document.querySelector(".starting-page")
@@ -19,8 +19,7 @@ const winningPage = document.querySelector(".winning-page")
 const winningText = document.querySelector(".winning-text")
 let emptyboard = ["","","","","","","","",""]
 
-start.addEventListener("click", (e)=>{
-  console.log(e)
+start.addEventListener("click", ()=>{
   start_page.style.display = "none"
   gamePage.style.display = "block"
 })
@@ -50,7 +49,7 @@ restart.addEventListener("click", ()=>{
 
   
   boards.forEach((board)=>{
-    board.addEventListener("click",(e)=>{
+    board.addEventListener("click",()=>{
       if(board.textContent == "") {
         board.textContent = currentplayer
         if(currentplayer == playerOne.marker ){
@@ -68,7 +67,6 @@ restart.addEventListener("click", ()=>{
       }
       else if(board.textContent !== "") {
         board.style.cursor = "not-allowed"
-       preventDefault()
       }
        
       
@@ -77,7 +75,7 @@ restart.addEventListener("click", ()=>{
       
       
       
-       console.log(checkWinner())
+   console.log(checkWinner())
       
      
   
@@ -117,11 +115,10 @@ restart.addEventListener("click", ()=>{
       let isAWin = true;
       for (let j = 0; j<winComboArray.length; j++){
         let cellIndex = winComboArray[j];
-        if(emptyboard[ cellIndex ]  !== waitingPlayer) {
+        if(emptyboard[cellIndex]  !== waitingPlayer) {
           // the ONLY way it is not a win is if any cell
           //  doesn't contain the current player's marker
           isAWin = false
-          console.log(isAWin)
         }
       }
       // at this point, did this combination represent a win?
@@ -137,16 +134,21 @@ restart.addEventListener("click", ()=>{
       } // this way, we get back the indexes of a win
       // if not, sad face, keep looping.
      
- 
+ if(!emptyboard.includes("") && isAWin == false){
+  console.log("draw")
+  winningPage.style.display = "flex"
+  winningText.textContent = "draw"
+  
+ }
     }
     
     // if we get to here, there was no win. We checked all the combos, and not
     // one was a winner. return false, to tell whoever called us "nope!"
   }
-  
-  
-}())
-
+ 
 
 
     
+
+
+  console.log("hi")
